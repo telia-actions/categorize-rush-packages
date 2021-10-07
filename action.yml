@@ -1,0 +1,12 @@
+name: Categorize rush projects by deploy configurations
+description: Package and upload packages to GitHub
+inputs:
+  rushProjects:
+    description: Array of rush projects to be categorized.
+    required: true
+outputs:
+  categories:
+    description: Categorized project directories.
+runs:
+  using: node12
+  main: dist/index.js
