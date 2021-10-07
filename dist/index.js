@@ -499,11 +499,15 @@ run();
 /***/ }),
 
 /***/ 314:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.categorize = void 0;
+const path_1 = __importDefault(__webpack_require__(622));
 const categorize = (rushPackages) => {
     const result = {
         byDeployCategory: {},
@@ -517,9 +521,11 @@ const categorize = (rushPackages) => {
 };
 exports.categorize = categorize;
 const updatePackageCategories = (pkg, output) => {
+    console.log(pkg);
     const { byDeployCategory, distinct, npm } = output;
     const { projectFolder, shouldPublish } = pkg;
-    const deployCategory = require(`${projectFolder}/package.json`).deployCategory;
+    const packageJsonPath = path_1.default.resolve(projectFolder, 'package.json');
+    const { deployCategory } = require(packageJsonPath);
     if (deployCategory) {
         if (!byDeployCategory[deployCategory]) {
             byDeployCategory[deployCategory] = [];

@@ -1,3 +1,5 @@
+import path from 'path';
+
 export const categorize = (rushPackages: RushPackage[]): CategorizationResult => {
   const result: CategorizationResult = {
     byDeployCategory: {},
@@ -12,10 +14,14 @@ export const categorize = (rushPackages: RushPackage[]): CategorizationResult =>
 };
 
 const updatePackageCategories = (pkg: RushPackage, output: CategorizationResult): void => {
+  console.log(pkg);
+
   const { byDeployCategory, distinct, npm } = output;
   const { projectFolder, shouldPublish } = pkg;
 
-  const deployCategory = require(`${projectFolder}/package.json`).deployCategory;
+  const packageJsonPath = path.resolve(projectFolder, 'package.json');
+
+  const { deployCategory } = require(packageJsonPath);
 
   if (deployCategory) {
     if (!byDeployCategory[deployCategory]) {
