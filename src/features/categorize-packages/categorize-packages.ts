@@ -28,9 +28,9 @@ const updatePackageCategories = (pkg: RushPackage, output: CategorizationResult)
   }
 
   if (shouldPublish) {
-    if (!output.npm) {
-      output.npm = [];
+    if (!output.shouldPublish) {
+      output.shouldPublish = [];
     }
-    output.npm.push(projectFolder);
+    output.shouldPublish.push(projectFolder);
   }
 };

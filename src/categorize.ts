@@ -1,4 +1,4 @@
-import { setOutput, setFailed, getInput } from '@actions/core';
+import { setOutput, setFailed, getInput, debug } from '@actions/core';
 import { categorizePackages } from './features/categorize-packages';
 
 export const categorize = (): void => {
@@ -9,7 +9,13 @@ export const categorize = (): void => {
 
     const categories = categorizePackages(rushProjects);
 
-    setOutput('categories', categories);
+    debug(JSON.stringify(categories, null, 2));
+
+    for (const [category, packages] of Object.entries(categories.byDeployCategory)) {
+      setOutput(category, packages);
+    }
+
+    setOutput('should-publish', categories.shouldPublish);
   } catch (e) {
     setFailed(e.message);
   }

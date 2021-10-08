@@ -5,8 +5,10 @@ inputs:
     description: Array of rush projects to be categorized.
     required: true
 outputs:
-  categories:
-    description: Categorized project directories.
+  # This action sets dynamic outputs according to deployCategory value in package.json
+  # For example all packages with category "k8s" will be grouped in array under outputs.k8s
+  should-publish:
+    description: List of packages to be published to npm.
 runs:
   using: node12
   main: dist/index.js

@@ -4,5 +4,5 @@ export type PackageCategories = {
 
 export type CategorizationResult = {
   byDeployCategory: PackageCategories;
-  npm?: string[];
+  shouldPublish?: string[];
 };
