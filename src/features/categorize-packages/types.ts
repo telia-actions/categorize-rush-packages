@@ -1,8 +1,8 @@
 export type PackageCategories = {
-  [key: string]: string[];
+  [key: string]: RushPackage[];
 };
 
 export type CategorizationResult = {
   byDeployCategory: PackageCategories;
-  shouldPublish?: string[];
+  shouldPublish?: RushPackage[];
 };

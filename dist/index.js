@@ -530,15 +530,15 @@ const updatePackageCategories = (pkg, output) => {
     const { deployCategory } = require(packageJsonPath);
     if (deployCategory) {
         if (!byDeployCategory[deployCategory]) {
-            byDeployCategory[deployCategory] = [projectFolder];
+            byDeployCategory[deployCategory] = [];
         }
-        byDeployCategory[deployCategory].push(projectFolder);
+        byDeployCategory[deployCategory].push(pkg);
     }
     if (shouldPublish) {
         if (!output.shouldPublish) {
             output.shouldPublish = [];
         }
-        output.shouldPublish.push(projectFolder);
+        output.shouldPublish.push(pkg);
     }
 };
 
