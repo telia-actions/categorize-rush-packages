@@ -1,5 +1,5 @@
 name: Categorize rush projects by deploy configurations
-description: Package and upload packages to GitHub
+description: Categorizes rush projects by deploy target based on configurations. Curently respects rush `shouldPublish` flag and package.json `deployCategory` field.
 inputs:
   rushProjects:
     description: Array of rush projects to be categorized.
