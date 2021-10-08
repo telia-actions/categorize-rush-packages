@@ -488,7 +488,6 @@ const categorize = () => {
         const rushProjectsInput = core_1.getInput('rushProjects');
         const rushProjects = JSON.parse(rushProjectsInput);
         const categories = categorize_packages_1.categorizePackages(rushProjects);
-        core_1.debug(JSON.stringify(categories, null, 2));
         for (const [category, packages] of Object.entries(categories.byDeployCategory)) {
             core_1.setOutput(category, packages);
         }
