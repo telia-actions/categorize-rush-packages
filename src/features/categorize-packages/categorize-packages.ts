@@ -1,10 +1,9 @@
 import path from 'path';
+import { CategorizationResult } from './types';
 
-export const categorize = (rushPackages: RushPackage[]): CategorizationResult => {
+export const categorizePackages = (rushPackages: RushPackage[]): CategorizationResult => {
   const result: CategorizationResult = {
     byDeployCategory: {},
-    distinct: [],
-    npm: [],
   };
 
   return rushPackages.reduce<CategorizationResult>((categories, _package) => {
@@ -14,9 +13,7 @@ export const categorize = (rushPackages: RushPackage[]): CategorizationResult =>
 };
 
 const updatePackageCategories = (pkg: RushPackage, output: CategorizationResult): void => {
-  console.log(pkg);
-
-  const { byDeployCategory, distinct, npm } = output;
+  const { byDeployCategory } = output;
   const { projectFolder, shouldPublish } = pkg;
 
   const packageJsonPath = path.resolve(projectFolder, 'package.json');
@@ -25,16 +22,15 @@ const updatePackageCategories = (pkg: RushPackage, output: CategorizationResult)
 
   if (deployCategory) {
     if (!byDeployCategory[deployCategory]) {
-      byDeployCategory[deployCategory] = [];
+      byDeployCategory[deployCategory] = [projectFolder];
     }
     byDeployCategory[deployCategory].push(projectFolder);
   }
 
   if (shouldPublish) {
-    npm.push(projectFolder);
-  }
-
-  if (!distinct.includes(projectFolder)) {
-    distinct.push(projectFolder);
+    if (!output.npm) {
+      output.npm = [];
+    }
+    output.npm.push(projectFolder);
   }
 };

@@ -475,30 +475,31 @@ exports.toCommandValue = toCommandValue;
 
 /***/ }),
 
-/***/ 399:
+/***/ 257:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.categorize = void 0;
 const core_1 = __webpack_require__(186);
-const utils_1 = __webpack_require__(314);
-const run = () => {
+const categorize_packages_1 = __webpack_require__(457);
+const categorize = () => {
     try {
         const rushProjectsInput = core_1.getInput('rushProjects');
         const rushProjects = JSON.parse(rushProjectsInput);
-        const categories = utils_1.categorize(rushProjects);
+        const categories = categorize_packages_1.categorizePackages(rushProjects);
         core_1.setOutput('categories', categories);
     }
     catch (e) {
         core_1.setFailed(e.message);
     }
 };
-run();
+exports.categorize = categorize;
 
 
 /***/ }),
 
-/***/ 314:
+/***/ 804:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -506,39 +507,67 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.categorize = void 0;
+exports.categorizePackages = void 0;
 const path_1 = __importDefault(__webpack_require__(622));
-const categorize = (rushPackages) => {
+const categorizePackages = (rushPackages) => {
     const result = {
         byDeployCategory: {},
-        distinct: [],
-        npm: [],
     };
     return rushPackages.reduce((categories, _package) => {
         updatePackageCategories(_package, categories);
         return categories;
     }, result);
 };
-exports.categorize = categorize;
+exports.categorizePackages = categorizePackages;
 const updatePackageCategories = (pkg, output) => {
-    console.log(pkg);
-    const { byDeployCategory, distinct, npm } = output;
+    const { byDeployCategory } = output;
     const { projectFolder, shouldPublish } = pkg;
     const packageJsonPath = path_1.default.resolve(projectFolder, 'package.json');
     const { deployCategory } = require(packageJsonPath);
     if (deployCategory) {
         if (!byDeployCategory[deployCategory]) {
-            byDeployCategory[deployCategory] = [];
+            byDeployCategory[deployCategory] = [projectFolder];
         }
         byDeployCategory[deployCategory].push(projectFolder);
     }
     if (shouldPublish) {
-        npm.push(projectFolder);
-    }
-    if (!distinct.includes(projectFolder)) {
-        distinct.push(projectFolder);
+        if (!output.npm) {
+            output.npm = [];
+        }
+        output.npm.push(projectFolder);
     }
 };
+
+
+/***/ }),
+
+/***/ 457:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__exportStar(__webpack_require__(804), exports);
+
+
+/***/ }),
+
+/***/ 399:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const categorize_1 = __webpack_require__(257);
+categorize_1.categorize();
 
 
 /***/ }),
