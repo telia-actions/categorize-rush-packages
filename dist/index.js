@@ -512,6 +512,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.categorizePackages = void 0;
 const path_1 = __importDefault(__webpack_require__(622));
+const json_client_1 = __webpack_require__(885);
 const categorizePackages = (rushPackages) => {
     const result = {
         byDeployCategory: {},
@@ -526,7 +527,7 @@ const updatePackageCategories = (pkg, output) => {
     const { byDeployCategory } = output;
     const { projectFolder, shouldPublish } = pkg;
     const packageJsonPath = path_1.default.resolve(projectFolder, 'package.json');
-    const { deployCategory } = require(packageJsonPath);
+    const { deployCategory } = json_client_1.read(packageJsonPath);
     if (deployCategory) {
         if (!byDeployCategory[deployCategory]) {
             byDeployCategory[deployCategory] = [];
@@ -571,6 +572,40 @@ __exportStar(__webpack_require__(804), exports);
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const categorize_1 = __webpack_require__(257);
 categorize_1.categorize();
+
+
+/***/ }),
+
+/***/ 885:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__exportStar(__webpack_require__(765), exports);
+
+
+/***/ }),
+
+/***/ 765:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.read = void 0;
+const read = (path) => {
+    return require(path);
+};
+exports.read = read;
 
 
 /***/ }),

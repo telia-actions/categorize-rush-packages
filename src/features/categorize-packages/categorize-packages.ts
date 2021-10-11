@@ -1,5 +1,6 @@
 import path from 'path';
 import { CategorizationResult } from './types';
+import { read } from '../../services/json-client';
 
 export const categorizePackages = (rushPackages: RushPackage[]): CategorizationResult => {
   const result: CategorizationResult = {
@@ -18,7 +19,7 @@ const updatePackageCategories = (pkg: RushPackage, output: CategorizationResult)
 
   const packageJsonPath = path.resolve(projectFolder, 'package.json');
 
-  const { deployCategory } = require(packageJsonPath);
+  const { deployCategory } = read(packageJsonPath);
 
   if (deployCategory) {
     if (!byDeployCategory[deployCategory]) {

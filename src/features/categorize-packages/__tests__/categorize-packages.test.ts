@@ -70,22 +70,6 @@ describe('features categorize packages', () => {
       expect(deployCategory2[1].packageName).toBe('project3');
     });
 
-    it('should categorize rush packages by deploy category', () => {
-      const rushPackages: RushPackage[] = [package1, package2];
-
-      const result = categorizePackages(rushPackages);
-
-      const deployCategory1 = result.byDeployCategory.deployCategory1;
-
-      expect(deployCategory1).toHaveLength(1);
-      expect(deployCategory1[0].packageName).toBe('project1');
-
-      const deployCategory2 = result.byDeployCategory.deployCategory2;
-
-      expect(deployCategory2).toHaveLength(1);
-      expect(deployCategory2[0].packageName).toBe('project2');
-    });
-
     it('should categorize publishable packages', () => {
       const rushPackages: RushPackage[] = [package4];
 
