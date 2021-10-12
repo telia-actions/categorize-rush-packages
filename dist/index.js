@@ -491,7 +491,7 @@ const categorize = () => {
         for (const [category, packages] of Object.entries(categories.byDeployCategory)) {
             core_1.setOutput(category, packages);
         }
-        core_1.setOutput('should-publish', categories.shouldPublish);
+        core_1.setOutput('npm-package', categories.npmPublish);
     }
     catch (e) {
         core_1.setFailed(e.message);
@@ -535,10 +535,10 @@ const updatePackageCategories = (pkg, output) => {
         byDeployCategory[deployCategory].push(pkg);
     }
     if (shouldPublish) {
-        if (!output.shouldPublish) {
-            output.shouldPublish = [];
+        if (!output.npmPublish) {
+            output.npmPublish = [];
         }
-        output.shouldPublish.push(pkg);
+        output.npmPublish.push(pkg);
     }
 };
 

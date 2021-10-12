@@ -13,7 +13,7 @@ export const categorize = (): void => {
       setOutput(category, packages);
     }
 
-    setOutput('should-publish', categories.shouldPublish);
+    setOutput('npm-package', categories.npmPublish);
   } catch (e) {
     setFailed(e.message);
   }

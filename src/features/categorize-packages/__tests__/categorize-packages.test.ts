@@ -75,10 +75,10 @@ describe('features categorize packages', () => {
 
       const result = categorizePackages(rushPackages);
 
-      const shouldPublish = result.shouldPublish as RushPackage[];
+      const npmPublish = result.npmPublish as RushPackage[];
 
-      expect(shouldPublish).toHaveLength(1);
-      expect(shouldPublish[0].packageName).toBe('project4');
+      expect(npmPublish).toHaveLength(1);
+      expect(npmPublish[0].packageName).toBe('project4');
     });
 
     it('should categorize multiple publishable packages', () => {
@@ -86,11 +86,11 @@ describe('features categorize packages', () => {
 
       const result = categorizePackages(rushPackages);
 
-      const shouldPublish = result.shouldPublish as RushPackage[];
+      const npmPublish = result.npmPublish as RushPackage[];
 
-      expect(shouldPublish).toHaveLength(2);
-      expect(shouldPublish[0].packageName).toBe('project4');
-      expect(shouldPublish[1].packageName).toBe('project6');
+      expect(npmPublish).toHaveLength(2);
+      expect(npmPublish[0].packageName).toBe('project4');
+      expect(npmPublish[1].packageName).toBe('project6');
     });
 
     it('should not categorize packages without deploy category', () => {
@@ -98,9 +98,9 @@ describe('features categorize packages', () => {
 
       const result = categorizePackages(rushPackages);
 
-      const shouldPublish = result.shouldPublish as RushPackage[];
+      const npmPublish = result.npmPublish as RushPackage[];
 
-      expect(shouldPublish).toBeUndefined();
+      expect(npmPublish).toBeUndefined();
 
       const byDeployCategory = result.byDeployCategory;
 

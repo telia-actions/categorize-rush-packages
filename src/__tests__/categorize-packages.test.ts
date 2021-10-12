@@ -31,7 +31,7 @@ describe('categorize', () => {
         category1: [package1],
         category2: [package2],
       },
-      shouldPublish: [package2],
+      npmPublish: [package2],
     };
 
     const rushPackages = [package1, package2];
@@ -50,7 +50,7 @@ describe('categorize', () => {
     expect(setOutputSpy).toHaveBeenCalledTimes(3);
     expect(setOutputSpy).toHaveBeenNthCalledWith(1, 'category1', [package1]);
     expect(setOutputSpy).toHaveBeenNthCalledWith(2, 'category2', [package2]);
-    expect(setOutputSpy).toHaveBeenNthCalledWith(3, 'should-publish', [package2]);
+    expect(setOutputSpy).toHaveBeenNthCalledWith(3, 'npm-package', [package2]);
 
     expect(setFailedSpy).toHaveBeenCalledTimes(0);
   });
