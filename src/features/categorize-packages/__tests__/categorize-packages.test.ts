@@ -46,12 +46,12 @@ describe('features categorize packages', () => {
       const deployCategory1 = result.byDeployCategory.deployCategory1;
 
       expect(deployCategory1).toHaveLength(1);
-      expect(deployCategory1[0].packageName).toBe('project1');
+      expect(deployCategory1[0]).toBe(package1);
 
       const deployCategory2 = result.byDeployCategory.deployCategory2;
 
       expect(deployCategory2).toHaveLength(1);
-      expect(deployCategory2[0].packageName).toBe('project2');
+      expect(deployCategory2[0]).toBe(package2);
     });
 
     it('should categorize multiple packages into same deploy category', () => {
@@ -66,8 +66,8 @@ describe('features categorize packages', () => {
       const deployCategory2 = result.byDeployCategory.deployCategory2;
 
       expect(deployCategory2).toHaveLength(2);
-      expect(deployCategory2[0].packageName).toBe('project2');
-      expect(deployCategory2[1].packageName).toBe('project3');
+      expect(deployCategory2[0]).toBe(package2);
+      expect(deployCategory2[1]).toBe(package3);
     });
 
     it('should categorize publishable packages', () => {
@@ -78,7 +78,7 @@ describe('features categorize packages', () => {
       const npmPublish = result.npmPublish as RushPackage[];
 
       expect(npmPublish).toHaveLength(1);
-      expect(npmPublish[0].packageName).toBe('project4');
+      expect(npmPublish[0]).toBe(package4);
     });
 
     it('should categorize multiple publishable packages', () => {
@@ -89,8 +89,8 @@ describe('features categorize packages', () => {
       const npmPublish = result.npmPublish as RushPackage[];
 
       expect(npmPublish).toHaveLength(2);
-      expect(npmPublish[0].packageName).toBe('project4');
-      expect(npmPublish[1].packageName).toBe('project6');
+      expect(npmPublish[0]).toBe(package4);
+      expect(npmPublish[1]).toBe(package6);
     });
 
     it('should not categorize packages without deploy category', () => {
