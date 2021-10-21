@@ -1,0 +1,14 @@
+name: Categorize rush projects by deploy configurations
+description: Categorizes rush projects by deploy target based on configurations. Curently respects rush `shouldPublish` flag and package.json `deployCategory` field.
+inputs:
+  rushProjects:
+    description: Array of rush projects to be categorized.
+    required: true
+outputs:
+  # This action sets dynamic outputs according to deployCategory value in package.json
+  # For example all packages with category "k8s" will be grouped in array under outputs.k8s
+  npm-package:
+    description: List of packages to be published to npm.
+runs:
+  using: node12
+  main: dist/index.js
