@@ -1,0 +1,22 @@
+{
+  "projects": [
+    {
+      "packageName": "project1",
+      "projectFolder": "__mocks__/projects/project1"
+    },
+    {
+      "packageName": "project2",
+      "projectFolder": "__mocks__/projects/project2"
+    },
+    {
+      "packageName": "project3",
+      "projectFolder": "__mocks__/projects/project3",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "project4",
+      "projectFolder": "__mocks__/projects/project4",
+      "shouldPublish": true
+    }
+  ]
+}

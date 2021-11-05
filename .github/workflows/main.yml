@@ -21,3 +21,14 @@ jobs:
         run: npm run test
       - name: Build package
         run: npm run build
+      - name: Testing rush changed packages action
+        uses: ./ # Uses an action in the root directory
+        id: test
+        with:
+          rushJsonPath: ./__mocks__/rush.json
+      - name: Show AWS projects
+        run: echo "AWS Projects - ${{ steps.test.outputs.aws }}"
+      - name: Show K8S projects
+        run: echo "K8S projects - ${{ steps.test.outputs.k8s }}"
+      - name: Show NPM projects
+        run: echo "NPM projects - ${{ steps.test.outputs.npmPublish }}"
