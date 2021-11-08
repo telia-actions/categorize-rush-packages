@@ -26,9 +26,24 @@ jobs:
         id: test
         with:
           rushJsonPath: ./__mocks__/rush.json
-      - name: Show AWS projects
-        run: echo "AWS Projects - ${{ steps.test.outputs.aws }}"
-      - name: Show K8S projects
-        run: echo "K8S projects - ${{ steps.test.outputs.k8s }}"
-      - name: Show NPM projects
-        run: echo "NPM projects - ${{ steps.test.outputs.npmPublish }}"
+      - name: Check AWS projects
+        env:
+          projects: ${{ steps.test.outputs.aws }}
+        uses: actions/github-script@v5
+        with:
+          script: |
+            require('./.github/scripts/validate.js')(core, process.env.projects, ["project1", "project2"])
+      - name: Check K8s projects
+        env:
+          projects: ${{ steps.test.outputs.k8s }}
+        uses: actions/github-script@v5
+        with:
+          script: |
+            require('./.github/scripts/validate.js')(core, process.env.projects, ["project3"])
+      - name: Check NPM projects
+        env:
+          projects: ${{ steps.test.outputs.npmPublish }}
+        uses: actions/github-script@v5
+        with:
+          script: |
+            require('./.github/scripts/validate.js')(core, process.env.projects, ["project3", "project4"])
