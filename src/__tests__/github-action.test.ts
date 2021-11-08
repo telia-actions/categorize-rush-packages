@@ -27,9 +27,9 @@ describe('github action', () => {
     const setOutputSpy = jest.spyOn(actionsCore, 'setOutput');
     run();
     expect(setOutputSpy).toHaveBeenCalledTimes(3);
-    expect(setOutputSpy).toHaveBeenNthCalledWith(1, 'category1', [project1]);
-    expect(setOutputSpy).toHaveBeenNthCalledWith(2, 'category2', [project2]);
-    expect(setOutputSpy).toHaveBeenNthCalledWith(3, 'npmPublish', [project2]);
+    expect(setOutputSpy).toHaveBeenCalledWith('category1', [project1]);
+    expect(setOutputSpy).toHaveBeenCalledWith('category2', [project2]);
+    expect(setOutputSpy).toHaveBeenCalledWith('npmPublish', [project2]);
   });
   describe('given that error occurs', () => {
     const errorMessage = 'mocked error';

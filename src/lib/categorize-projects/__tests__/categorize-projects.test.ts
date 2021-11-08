@@ -24,8 +24,8 @@ describe('categorize projects lib', () => {
     it('should not categorize packages without deploy category', () => {
       const rushProjects: RushProject[] = [project5];
       const result = categorizeProjects(rushProjects);
-      const deployCategory = result.category.npmPublish;
-      expect(deployCategory).toBeUndefined();
+      const deployCategory = result.category;
+      expect(deployCategory).toStrictEqual({});
     });
   });
 });

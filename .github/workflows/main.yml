@@ -32,18 +32,21 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            require('./.github/scripts/validate.js')(core, process.env.projects, ["project1", "project2"])
+            const script = require('./.github/scripts/tests/validate_rush_projects.js')
+            script(core, process.env.projects, ["project1", "project2"])
       - name: Check K8s projects
         env:
           projects: ${{ steps.test.outputs.k8s }}
         uses: actions/github-script@v5
         with:
           script: |
-            require('./.github/scripts/validate.js')(core, process.env.projects, ["project3"])
+            const script = require('./.github/scripts/tests/validate_rush_projects.js')
+            script(core, process.env.projects, ["project3"])
       - name: Check NPM projects
         env:
           projects: ${{ steps.test.outputs.npmPublish }}
         uses: actions/github-script@v5
         with:
           script: |
-            require('./.github/scripts/validate.js')(core, process.env.projects, ["project3", "project4"])
+            const script = require('./.github/scripts/tests/validate_rush_projects.js')
+            script(core, process.env.projects, ["project3", "project4"])
