@@ -5,9 +5,16 @@
   "parserOptions": {
     "ecmaVersion": 9,
     "sourceType": "module",
-    "project": "./tsconfig.test.json"
+    "project": "./tsconfig.json"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
   },
   "rules": {
+    "i18n-text/no-en": "off",
+    "filenames/match-regex": [ 2, "^[a-z\\-]+(\\.test)?$", true ],
     "eslint-comments/no-use": "off",
     "import/no-namespace": "off",
     "no-undef": "off",

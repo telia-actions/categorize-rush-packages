@@ -21,3 +21,32 @@ jobs:
         run: npm run test
       - name: Build package
         run: npm run build
+      - name: Testing rush changed packages action
+        uses: ./ # Uses an action in the root directory
+        id: test
+        with:
+          rushJsonPath: ./__mocks__/rush.json
+      - name: Check AWS projects
+        env:
+          projects: ${{ steps.test.outputs.aws }}
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const script = require('./.github/scripts/tests/validate_rush_projects.js')
+            script(core, process.env.projects, ["project1", "project2"])
+      - name: Check K8s projects
+        env:
+          projects: ${{ steps.test.outputs.k8s }}
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const script = require('./.github/scripts/tests/validate_rush_projects.js')
+            script(core, process.env.projects, ["project3"])
+      - name: Check NPM projects
+        env:
+          projects: ${{ steps.test.outputs.npmPublish }}
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const script = require('./.github/scripts/tests/validate_rush_projects.js')
+            script(core, process.env.projects, ["project3", "project4"])
