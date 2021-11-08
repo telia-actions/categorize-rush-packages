@@ -1,12 +1,14 @@
 import * as actionsCore from '@actions/core';
 import * as lib from '@src/lib/categorize-projects';
 import * as util from '@src/util/json-client';
-import { project1, project2 } from '../__mocks__/projects';
+import projects from '../__mocks__/projects';
 import { run } from '../github-action';
 
 jest.mock('@actions/core');
 jest.mock('@src/util/json-client');
 jest.mock('@src/lib/categorize-projects');
+
+const { project1, project2 } = projects;
 
 describe('github action', () => {
   beforeEach(() => {
