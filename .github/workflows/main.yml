@@ -32,7 +32,7 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            require('./.github/scripts/validate.js')(core, process.env.projects, ["project1", "project2", "project3"])
+            require('./.github/scripts/validate.js')(core, process.env.projects, ["project1", "project2"])
       - name: Check K8s projects
         env:
           projects: ${{ steps.test.outputs.k8s }}
