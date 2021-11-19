@@ -30,7 +30,7 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: test
         with:
-          rushProjects: '[${{ project1 }},${{ project2 }},${{ project3 }},${{ project24 }}]'
+          rushProjects: '[${{ env.project1 }}, ${{ env.project2 }}, ${{ env.project3 }}, ${{ env.project24 }}]'
       - name: Check AWS projects
         env:
           projects: ${{ steps.test.outputs.aws }}
