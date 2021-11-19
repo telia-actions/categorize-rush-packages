@@ -1565,11 +1565,10 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = void 0;
 const core_1 = __webpack_require__(186);
 const categorize_projects_1 = __webpack_require__(138);
-const json_client_1 = __webpack_require__(434);
 const run = () => {
     try {
-        const rushJsonPath = core_1.getInput('rushJsonPath');
-        const rushProjects = json_client_1.readJsonWithComments(rushJsonPath).projects;
+        const rushProjectsInput = core_1.getInput('rushProjects');
+        const rushProjects = JSON.parse(rushProjectsInput);
         const projectsByCategory = categorize_projects_1.categorizeProjects(rushProjects);
         for (const [category, projects] of Object.entries(projectsByCategory.category)) {
             core_1.setOutput(category, projects);
@@ -1691,18 +1690,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.readJsonWithComments = exports.readJson = void 0;
+exports.readJson = void 0;
 const fs_1 = __importDefault(__webpack_require__(747));
 const readJson = (path) => {
     return JSON.parse(fs_1.default.readFileSync(path, 'utf-8'));
 };
 exports.readJson = readJson;
-const readJsonWithComments = (path) => {
-    return JSON.parse(fs_1.default
-        .readFileSync(path, 'utf-8')
-        .replace(/\\"|"(?:\\"|[^"])*"|(\/\/.*|\/\*[\s\S]*?\*\/)/g, (jsonKeyOrValue, comment) => comment ? '' : jsonKeyOrValue));
-};
-exports.readJsonWithComments = readJsonWithComments;
 
 
 /***/ }),

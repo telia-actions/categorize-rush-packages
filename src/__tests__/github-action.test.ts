@@ -1,8 +1,7 @@
 import * as actionsCore from '@actions/core';
 import * as lib from '@src/lib/categorize-projects';
-import * as util from '@src/util/json-client';
-import projects from '../__mocks__/projects';
-import { run } from '../github-action';
+import projects from '@src/__mocks__/projects';
+import { run } from '@src/github-action';
 
 jest.mock('@actions/core');
 jest.mock('@src/util/json-client');
@@ -19,9 +18,7 @@ describe('github action', () => {
         npmPublish: [project2],
       },
     });
-    jest.spyOn(util, 'readJsonWithComments').mockReturnValue({
-      projects: [],
-    });
+    jest.spyOn(actionsCore, 'getInput').mockReturnValue(JSON.stringify(projects));
   });
   it('set outputs for every deploy category', () => {
     const setOutputSpy = jest.spyOn(actionsCore, 'setOutput');
