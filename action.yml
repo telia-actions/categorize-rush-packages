@@ -5,8 +5,10 @@ inputs:
     description: Rush projects which should be categorized
     required: true
 outputs:
-  # This action sets dynamic outputs according to deployCategory value in package.json
-  # For example all packages with category "k8s" will be grouped in array under outputs.k8s
+  dynamic-output:
+    description: |
+      This action sets dynamic outputs according to deployCategory value in package.json.
+      For example all packages with category "k8s" will be grouped in array under outputs.k8s
 runs:
   using: node12
   main: dist/index.js
