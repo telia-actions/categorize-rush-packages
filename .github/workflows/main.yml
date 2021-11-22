@@ -22,10 +22,15 @@ jobs:
       - name: Build package
         run: npm run build
       - name: Testing rush changed packages action
+        env:
+          project1: '{"packageName": "project1","projectFolder": "__mocks__/projects/project1"}'
+          project2: '{"packageName": "project2","projectFolder": "__mocks__/projects/project2"}'
+          project3: '{"packageName": "project3","projectFolder": "__mocks__/projects/project3","shouldPublish": true}'
+          project4: '{"packageName": "project4","projectFolder": "__mocks__/projects/project4","shouldPublish": true}'
         uses: ./ # Uses an action in the root directory
         id: test
         with:
-          rushJsonPath: ./__mocks__/rush.json
+          rushProjects: '[${{ env.project1 }}, ${{ env.project2 }}, ${{ env.project3 }}, ${{ env.project4 }}]'
       - name: Check AWS projects
         env:
           projects: ${{ steps.test.outputs.aws }}
