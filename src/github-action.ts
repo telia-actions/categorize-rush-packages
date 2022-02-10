@@ -9,6 +9,7 @@ export const run = (): void => {
     for (const [category, projects] of Object.entries(projectsByCategory.category)) {
       setOutput(category, projects);
     }
+    setOutput('preview', rushProjects.filter(p => p.packageName === "@telia/b2c-support"));
   } catch (error: any) {
     setFailed(error.message);
   }

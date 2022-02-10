@@ -1573,6 +1573,7 @@ const run = () => {
         for (const [category, projects] of Object.entries(projectsByCategory.category)) {
             core_1.setOutput(category, projects);
         }
+        core_1.setOutput('preview', rushProjects.filter(p => p.packageName === "@telia/b2c-support"));
     }
     catch (error) {
         core_1.setFailed(error.message);
